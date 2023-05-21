@@ -1,0 +1,30 @@
+<div id="app1">
+  <p>{{message}}</p>
+  <p>{{name}}</p>
+</div>
+
+<body>
+<script src="../vue.js"></script>
+<script>
+  // Vue CLI
+  Vue.component('hello', {
+    template: '<p>hello</p>'
+  });
+
+  const data = {
+    message: 'hello',
+    name: 'name',
+  }
+
+  const app1 = new Vue({
+    el: '#app1',
+    data: data,
+    computed: {
+    },
+    methods: {
+    },
+    watch: {
+    },
+  })
+</script>
+</body>

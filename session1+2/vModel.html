@@ -1,0 +1,69 @@
+<link rel="stylesheet" href="sessionCss.css">
+
+<div id="app1">
+  <input type="text" v-model="message">
+  <p>{{ message }}</p>
+  <p>{{ counter }}</p>
+  <button @click="counter += 1">push</button>
+  <!-- computedの参照先の値が変わるたびに動く -->
+  <p>{{ lessThanThreeComputed }}</p>
+  <!-- テンプレート再描画時に毎回動く -->
+  <p>{{ lessThanThreeMethod() }}</p>
+
+  <h1 :class="classObject">Hello</h1>
+  <button @click="isActive = !isActive">change</button>
+
+  <h1 :class="[color, bg]">Array</h1>
+
+  <h1 :style="[styleObj, baseStyle]">Style</h1>
+</div>
+
+
+<body>
+<script src="../vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app1',
+    data: {
+      message: 'Hello World',
+      counter: 3,
+      isActive: true,
+      color: 'red',
+      bg: 'bg-blue',
+      styleObj: {
+        color: 'red',
+        'background-color': 'blue'
+      },
+      baseStyle: {
+        fontSize: '60px'
+      }
+    },
+    computed: {
+      lessThanThreeComputed: function () {
+        return this.counter > 3 ? '3+' : '3-'
+      },
+      classObject: function () {
+        return {
+          red: !this.isActive,
+          'bg-blue': this.isActive
+        }
+      },
+    },
+    methods: {
+      // 同期処理
+      lessThanThreeMethod: function () {
+        return this.counter > 3 ? '3+' : '3-'
+      }
+    },
+    watch: {
+      // 非同期処理
+      counter: function () {
+        const vm = this;
+        setTimeout(function(){
+          vm.counter = 0;
+        }, 3000)
+      }
+    }
+  })
+</script>
+</body>

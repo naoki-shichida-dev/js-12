@@ -1,0 +1,79 @@
+<link rel="stylesheet" href="sessionCss.css">
+
+<div id="app2">
+    <p v-if="ok">OK</p>
+    <p v-else-if="maybeOk">maybe OK</p>
+    <p v-else>Not OK</p>
+    <template v-if="ok">
+        <p>Hello</p>
+        <p>bye</p>
+        <p>good luck</p>
+    </template>
+    <button @click="changeTemplate">change</button>
+
+    <p v-show="ok">Show</p>
+
+    <ul>
+        <li v-for="(fruit, index) of fruits">({{index}}){{fruit}}</li>
+    </ul>
+    <ul>
+        <li v-for="(value, key, index) in object">{{index}} - {{key}} - {{value}}</li>
+    </ul>
+
+    <template v-for="fruit in fruits">
+        <ul>
+            <li>{{fruit}}</li>
+            <hr>
+        </ul>
+    </template>
+
+    <ul>
+        <li v-for="n in 10">{{n}}</li>
+    </ul>
+
+    <ul>
+        <div v-for="(fruit, index) in fruits" :key="fruit">
+            <p>({{index}}) - {{fruit}}</p>
+            <input type="text">
+        </div>
+    </ul>
+    <button @click="remove">delete</button>
+</div>
+
+
+<body>
+<script src="../vue.js"></script>
+<script>
+    const app = new Vue({
+        el: '#app2',
+        data: {
+            ok: true,
+            maybeOk: true,
+            fruits: [
+                'apple',
+                'banana',
+                'grape'
+            ],
+            object: {
+                firstName: 'taro',
+                lastName: 'tanaka',
+                age: 21
+            }
+        },
+        computed: {
+
+        },
+        methods: {
+            changeTemplate: function () {
+                return this.ok = !this.ok
+            },
+            remove: function () {
+                this.fruits.shift()
+            }
+        },
+        watch: {
+
+        }
+    })
+</script>
+</body>

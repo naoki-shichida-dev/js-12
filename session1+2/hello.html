@@ -1,0 +1,61 @@
+<div id="app">
+    <p>{{ message }}</p>
+    <p>{{ number + 3 }}</p>
+    <p>{{ ok ? 'yes':'no' }}</p>
+    <p>{{ sayHi() }}</p>
+    <button v-on:click="reverseMessage()">push</button>
+    <p v-text="message"></p>
+    <a :[attribute]="url">Google</a>
+    <a v-bind="twitterObject">Twitter</a>
+    <p>{{count}}</p>
+    <button @click="countUp(2)">CountUp</button>
+    <p v-on:mousemove="changeMousePosition(3, $event)">mouse hover<span v-on:mousemove.stop>not Action</span></p>
+    <p>x: {{x}} y: {{y}}</p>
+    <input type="text" v-on:keyup.enter="myAlert">
+</div>
+
+
+<body>
+<script src="../vue.js"></script>
+<script>
+    const app = new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello World',
+            number: 3,
+            ok: true,
+            url: 'https://google.com',
+            attribute: 'href',
+            twitterObject: {
+                href: 'https://twitter.com',
+                id: 1
+            },
+            count: 0,
+            x: 0,
+            y: 0,
+        },
+        methods: {
+            reverseMessage: function () {
+                this.message = this.message.split('').reverse().join('')
+            },
+            sayHi: function () {
+                this.message = 'Vue'
+                return 'Hi';
+            },
+            countUp: function (calc) {
+                this.count+= 1 * calc;
+            },
+            changeMousePosition: function (num, event) {
+                this.x = event.clientX / num;
+                this.y = event.clientY / num;
+            },
+            noEvent: function () {
+                event.stopPropagation()
+            },
+            myAlert: function () {
+                alert('alert')
+            }
+        }
+    })
+</script>
+</body>

@@ -1,0 +1,44 @@
+<div id="app">
+  <my-component></my-component>
+  <my-component></my-component>
+  <my-component></my-component>
+</div>
+
+<div id="app2">
+  <my-component></my-component>
+  <my-component></my-component>
+  <my-component></my-component>
+</div>
+
+
+<body>
+<script src="../vue.js"></script>
+<script>
+
+  const component = {
+    // 関数の理由：　オブジェクトであった場合はすべて参照で同じデータを共有してしまう
+    data: function () {
+      return {
+        number: 12
+      }
+    },
+    template: '<p>good({{number}})</p>'
+  }
+
+  const app1 = new Vue({
+    el: '#app',
+    component: {
+      'my-component': component
+    },
+    data: {
+      number: 12
+    },
+    computed: {
+    },
+    methods: {
+    },
+    watch: {
+    },
+  })
+</script>
+</body>

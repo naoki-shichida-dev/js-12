@@ -1,0 +1,121 @@
+<div id="app3">
+  <p>{{message}}</p>
+  <p>{{name}}</p>
+  <p>{{myData}}</p>
+</div>
+
+<div id="app4">
+  <p>{{message}}</p>
+  <button @click="changeMessage1">instant1 change</button>
+</div>
+
+<div id="app5">
+  <p>{{name}}</p>
+  <button @click="name = 'taro'">change name</button>
+  <button @click="destroy">destroy</button>
+  <Hello></Hello>
+  <Hello></Hello>
+  <Hello></Hello>
+</div>
+
+
+
+<body>
+<script src="../vue.js"></script>
+<script>
+
+  Vue.component('hello', {
+    template: '<p>hello</p>'
+  });
+
+  const data = {
+    message: 'hello',
+    name: 'name',
+  }
+
+  const app1 = new Vue({
+    el: '#app3',
+    data: data,
+    template: '<h1>hello {{name}}</h1>',
+    computed: {
+      myData: function () {
+        return this.$data
+      }
+    },
+    methods: {
+
+    },
+    watch: {
+
+    },
+  })
+
+  app1.message = 'changed'
+  console.log(app1.$data)
+
+  const app2 = new Vue({
+    el: '#app4',
+    data: {
+      message: 'instant2',
+      name: 'name'
+    },
+    computed: {
+
+    },
+    methods: {
+      changeMessage1: function () {
+        app1.message = 'changed!!!'
+      }
+    },
+    watch: {
+
+    },
+    render: function (createElement) {
+      return createElement('h1', 'hello' + this.name);
+    }
+  })
+
+  const app3 = new Vue({
+    el: '#app5',
+    data: {
+      message: 'lifeCircle',
+      name: 'none'
+    },
+    beforeCreate: function () {
+      console.log('beforeCreate')
+    },
+    created: function () {
+      console.log('beforeCreate')
+    },
+    beforeMount: function () {
+      console.log('beforeMount')
+    },
+    mounted: function () {
+      console.log('mounted')
+    },
+    beforeUpdate: function () {
+      console.log('beforeUpdate')
+    },
+    updated: function () {
+      console.log('updated')
+    },
+    beforeDestroy: function () {
+      console.log('beforeDestroy')
+    },
+    destroyed: function () {
+      console.log('destroyed')
+    },
+    methods: {
+      destroy: function () {
+        this.$destroy()
+      }
+    }
+  })
+
+  const dir = document.createElement('div');
+  console.log(dir)
+  console.log(document)
+  // DOM late
+  // virtual DOM fast javascript
+</script>
+</body>
